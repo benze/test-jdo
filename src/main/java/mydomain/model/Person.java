@@ -2,10 +2,13 @@ package mydomain.model;
 
 import javax.jdo.annotations.*;
 
+import static javax.jdo.annotations.SequenceStrategy.NONTRANSACTIONAL;
+
 @PersistenceCapable(detachable="true")
+@DatastoreIdentity(strategy= IdGeneratorStrategy.SEQUENCE, sequence="toto" )
+@Sequence(name="toto", datastoreSequence = "jdo_sequence", strategy=NONTRANSACTIONAL)
 public class Person
 {
-    @PrimaryKey
     Long id;
 
     String name;

@@ -12,9 +12,9 @@
             <!-- Update these datastore details if different -->
             <property name="javax.jdo.PersistenceManagerFactoryClass" value="org.datanucleus.api.jdo.JDOPersistenceManagerFactory"/>
 
-            <property name="javax.jdo.option.ConnectionURL" value="jdbc:h2:mem:nucleus"/>
-            <property name="javax.jdo.option.ConnectionUserName" value="sa"/>
-            <property name="javax.jdo.option.ConnectionPassword" value=""/>
+            <property name="javax.jdo.option.ConnectionURL" value="jdbc:sqlserver://127.0.0.1:1433;databaseName=poc_datanucleus_testjdo"/>
+            <property name="javax.jdo.option.ConnectionUserName" value="datanucleus"/>
+            <property name="javax.jdo.option.ConnectionPassword" value="datanucleus"/>
 
             <property name="datanucleus.schema.autoCreateAll" value="true"/>
             <property name="datanucleus.generateSchema.database.mode" value="drop-and-create"/>

@@ -23,6 +23,8 @@ public class SimpleTest
             tx.begin();
 
             // [INSERT code here to persist object required for testing]
+            Person person = new Person(1, "person");
+            pm.makePersistent(person);
 
             tx.commit();
         }
