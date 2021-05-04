@@ -11,3 +11,11 @@ necessary to add your model and persistence commands. The files that you'll like
 * <a href="https://github.com/datanucleus/test-jdo/blob/master/src/test/java/org/datanucleus/test/MultithreadTest.java">src/test/java/org/datanucleus/test/MultithreadTest.java</a>   **[Edit this if a multi-thread test is required]**
 
 To run this, simply type "mvn clean compile test"
+
+
+---
+
+Sample to demonstrate a problem with Abstract class representing N-1 relation with implicit transactions.  This causes infinite loop StackOverflows for some reason.
+Similarly, the "fetch-fk-only" does not seem to make any difference.
+
+Using implicit transactions (ie: no defined `tx.begin()` or `tx.commit()`) causes an infinite loop when DN attempts to load the `Person` object. 
