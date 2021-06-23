@@ -1,12 +1,17 @@
 package org.datanucleus.test;
 
-import java.util.*;
-import org.junit.*;
-import javax.jdo.*;
-
-import static org.junit.Assert.*;
-import mydomain.model.*;
+import mydomain.model.Person;
 import org.datanucleus.util.NucleusLogger;
+import org.junit.Test;
+
+import javax.jdo.JDOHelper;
+import javax.jdo.PersistenceManager;
+import javax.jdo.PersistenceManagerFactory;
+import javax.jdo.Query;
+import javax.jdo.Transaction;
+import java.util.List;
+
+import static org.junit.Assert.fail;
 
 public class SimpleTest
 {
@@ -22,9 +27,37 @@ public class SimpleTest
         {
             tx.begin();
 
-            // [INSERT code here to persist object required for testing]
+            Person p1 = new Person(1, "First");
+            pm.makePersistent(p1);
 
             tx.commit();
+        }
+        catch (Throwable thr)
+        {
+            NucleusLogger.GENERAL.error(">> Exception in test", thr);
+            fail("Failed test : " + thr.getMessage());
+        }
+        finally 
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+        pmf.getDataStoreCache().evictAll();
+
+        pm = pmf.getPersistenceManager();
+        tx = pm.currentTransaction();
+        try
+        {
+            NucleusLogger.GENERAL.info(">> Querying");
+            Query q = pm.newQuery("SQL", "SELECT name from PERSON");
+            List<PersonInfo> results = q.executeResultList(PersonInfo.class);
+
+            for( PersonInfo boxInfo : results ){
+                NucleusLogger.GENERAL.info(">> r=" + boxInfo);
+            }
         }
         catch (Throwable thr)
         {
