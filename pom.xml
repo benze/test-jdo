@@ -41,7 +41,8 @@
         <dependency>
             <groupId>org.datanucleus</groupId>
             <artifactId>datanucleus-rdbms</artifactId>
-            <version>[${dn.datastore.min.ver}, ${dn.datastore.max.ver})</version>
+<!--            <version>[${dn.datastore.min.ver}, ${dn.datastore.max.ver})</version>-->
+            <version>5.2.9-SNAPSHOT</version>
         </dependency>
 
         <!-- Change to the datastore driver required for your datastore -->

@@ -10,6 +10,7 @@ import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Query;
 import javax.jdo.Transaction;
 import java.util.List;
+import java.util.Random;
 
 import static org.junit.Assert.fail;
 
@@ -27,8 +28,12 @@ public class SimpleTest
         {
             tx.begin();
 
-            Person p1 = new Person(1, "First");
-            pm.makePersistent(p1);
+            Random rnd = new Random();
+
+            for( int i = 0; i<20; i++) {
+                Person p1 = new Person(i, "First", rnd.nextInt());
+                pm.makePersistent(p1);
+            }
 
             tx.commit();
         }
@@ -51,13 +56,18 @@ public class SimpleTest
         tx = pm.currentTransaction();
         try
         {
+            tx.begin();
             NucleusLogger.GENERAL.info(">> Querying");
-            Query q = pm.newQuery("SQL", "SELECT name from PERSON");
-            List<PersonInfo> results = q.executeResultList(PersonInfo.class);
 
-            for( PersonInfo boxInfo : results ){
+            Query q = pm.newQuery(Person.class);
+            q.setFilter("id == (select count(id) from Person p) ");   // fails
+
+            List<Person> results = q.executeList();
+
+            for( Person boxInfo : results ){
                 NucleusLogger.GENERAL.info(">> r=" + boxInfo);
             }
+            tx.commit();
         }
         catch (Throwable thr)
         {
