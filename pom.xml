@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                       http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.datanucleus</groupId>
@@ -16,7 +16,7 @@
         <dn.api_jdo.min.ver>5.1.99</dn.api_jdo.min.ver>
         <dn.api_jdo.max.ver>5.2.99</dn.api_jdo.max.ver>
         <dn.datastore.min.ver>5.1.99</dn.datastore.min.ver>
-        <dn.datastore.max.ver>5.2.99</dn.datastore.max.ver>
+        <dn.datastore.max.ver>5.2.9</dn.datastore.max.ver>
         <dn.maven.plugin.ver>5.2.1</dn.maven.plugin.ver>
     </properties>
 
@@ -41,7 +41,7 @@
         <dependency>
             <groupId>org.datanucleus</groupId>
             <artifactId>datanucleus-rdbms</artifactId>
-            <version>[${dn.datastore.min.ver}, ${dn.datastore.max.ver})</version>
+            <version>[${dn.datastore.min.ver}, ${dn.datastore.max.ver}]</version>
         </dependency>
 
         <!-- Change to the datastore driver required for your datastore -->
@@ -49,6 +49,12 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>1.3.168</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>mssql-jdbc</artifactId>
+            <version>8.4.1.jre8</version>
         </dependency>
 
         <dependency>

@@ -7,17 +7,36 @@
     <persistence-unit name="MyTest">
         <!-- Add all of your model classes here -->
         <class>mydomain.model.Person</class>
+        <class>mydomain.model.Friend</class>
+        <class>mydomain.model.Neighbour</class>
+        <class>mydomain.model.BestFriend</class>
+        <class>mydomain.model.Partner</class>
+        <class>mydomain.model.Auditable</class>
+
         <exclude-unlisted-classes />
         <properties>
             <!-- Update these datastore details if different -->
             <property name="javax.jdo.PersistenceManagerFactoryClass" value="org.datanucleus.api.jdo.JDOPersistenceManagerFactory"/>
 
-            <property name="javax.jdo.option.ConnectionURL" value="jdbc:h2:mem:nucleus"/>
-            <property name="javax.jdo.option.ConnectionUserName" value="sa"/>
-            <property name="javax.jdo.option.ConnectionPassword" value=""/>
+<!--            <property name="javax.jdo.option.ConnectionURL" value="jdbc:h2:mem:nucleus"/>-->
+<!--            <property name="javax.jdo.option.ConnectionUserName" value="sa"/>-->
+<!--            <property name="javax.jdo.option.ConnectionPassword" value=""/>-->
 
-            <property name="datanucleus.schema.autoCreateAll" value="true"/>
+
+                <property name="javax.jdo.option.ConnectionDriverName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+                <property name="javax.jdo.option.ConnectionURL" value="jdbc:sqlserver://127.0.0.1:1433;databaseName=POC_DATANUCLEUS_2"/>
+                <property name="javax.jdo.option.ConnectionUserName" value="datanucleus"/>
+                <property name="javax.jdo.option.ConnectionPassword" value="datanucleus"/>
+
+
+            <property name="datanucleus.datastoreIdentityType" value="kodo"/>
+            <property name="javax.jdo.option.Optimistic" value="true"/>
+
             <property name="datanucleus.generateSchema.database.mode" value="drop-and-create"/>
+            <property name="datanucleus.generateSchema.create.order" value="script"/>
+            <property name="datanucleus.generateSchema.drop.order" value="script"/>
+            <property name="datanucleus.generateSchema.scripts.create.source" value="src/main/resources/create_script.ddl"/>
+            <property name="datanucleus.generateSchema.scripts.drop.source" value="src/main/resources/drop_script.ddl"/>
         </properties>
     </persistence-unit>
 
